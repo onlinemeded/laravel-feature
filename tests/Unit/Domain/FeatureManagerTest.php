@@ -22,7 +22,7 @@ class FeatureManagerTest extends TestCase
         parent::setUp();
 
         $this->repositoryMock = $this->getMockBuilder(FeatureRepositoryInterface::class)
-            ->setMethods(['save', 'remove', 'findByName', 'enableFor', 'disableFor', 'isEnabledFor'])
+            ->setMethods(['exists', 'save', 'remove', 'findByName', 'enableFor', 'disableFor', 'isEnabledFor'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -53,6 +53,14 @@ class FeatureManagerTest extends TestCase
             ->willThrowException(new FeatureException('Unable to save the feature.'));
 
         $this->manager->add('my.feature', true);
+    }
+
+    public function testExists()
+    {
+        $this->repositoryMock->expects($this->once())
+            ->method('exists');
+
+        $this->manager->exists('my.new.feature');
     }
 
     /**

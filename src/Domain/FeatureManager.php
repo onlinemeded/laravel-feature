@@ -20,6 +20,11 @@ class FeatureManager
         $this->repository = $repository;
     }
 
+    public function exists($featureName)
+    {
+        return $this->repository->exists($featureName);
+    }
+
     public function add($featureName, $isEnabled)
     {
         $feature = Feature::fromNameAndStatus($featureName, $isEnabled);

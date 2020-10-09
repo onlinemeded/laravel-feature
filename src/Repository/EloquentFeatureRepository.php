@@ -10,6 +10,11 @@ use LaravelFeature\Model\Feature as Model;
 
 class EloquentFeatureRepository implements FeatureRepositoryInterface
 {
+    public function exists($featureName)
+    {
+        return Model::where('name', '=', $featureName)->exists();
+    }
+
     public function save(Feature $feature)
     {
         /** @var Model $model */
@@ -20,7 +25,7 @@ class EloquentFeatureRepository implements FeatureRepositoryInterface
         }
 
         $model->name = $feature->getName();
-        $model->is_enabled = $model->is_enabled ?? $feature->isEnabled();
+        $model->is_enabled = $feature->isEnabled();
 
         try {
             $model->save();

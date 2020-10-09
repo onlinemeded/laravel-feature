@@ -10,6 +10,11 @@ use LaravelFeature\Model\Feature as Model;
 
 class EloquentFeatureRepository implements FeatureRepositoryInterface
 {
+    public function exists($featureName)
+    {
+        return Model::where('name', '=', $featureName)->exists();
+    }
+
     public function save(Feature $feature)
     {
         /** @var Model $model */

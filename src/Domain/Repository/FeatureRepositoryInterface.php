@@ -7,6 +7,8 @@ use LaravelFeature\Featurable\FeaturableInterface;
 
 interface FeatureRepositoryInterface
 {
+    public function exists($featureName);
+
     public function save(Feature $feature);
 
     public function remove(Feature $feature);

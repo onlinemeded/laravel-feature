@@ -42,7 +42,7 @@ class FeaturesViewScanner
         $foundDirectives = array_unique($foundDirectives);
 
         foreach ($foundDirectives as $directive) {
-            if (!$this->featureManager->isEnabled($directive)) {
+            if (!$this->featureManager->exists($directive)) {
                 $this->featureManager->add($directive, $this->config->get('features.scanned_default_enabled'));
             }
         }

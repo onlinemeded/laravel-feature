@@ -55,6 +55,14 @@ class FeatureManagerTest extends TestCase
         $this->manager->add('my.feature', true);
     }
 
+    public function testExists()
+    {
+        $this->repositoryMock->expects($this->once())
+            ->method('exists');
+
+        $this->manager->exists('my.new.feature');
+    }
+
     /**
      * Tests that everything goes well during a feature removal.
      */

@@ -50,6 +50,19 @@ class EloquentFeatureRepositoryTest extends TestCase
         $this->repository->save($feature);
     }
 
+    public function testFeatureCanBeCheckedForExistence()
+    {
+        $feature = Feature::fromNameAndStatus('my.feature', false);
+        $this->repository->save($feature);
+
+        $this->assertTrue($this->repository->exists('my.feature'));
+    }
+
+    public function testFeatureCanBeCheckedForNonExistence()
+    {
+        $this->assertFalse($this->repository->exists('my.feature'));
+    }
+
     /**
      * Tests that the removal operation goes well.
      */
